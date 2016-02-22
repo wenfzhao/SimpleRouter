@@ -13,6 +13,7 @@ class Router {
     static let sharedInstance = Router()
     private let routeKey = "_routeIdentifierKey"
     private var routeMaps = NSMutableDictionary()
+    private var namedRoutes = [String: Route]()
     
     private init() {
         
@@ -53,6 +54,34 @@ class Router {
         return route
     }
     
+    func findRouteByName(name: String) -> Route? {
+        return namedRoutes[name]
+    }
+    
+    func getRouteUrl(routeName: String, parameters: [String: String]?) -> String? {
+        var url: String?
+        var urlParts = [String]()
+        if let route = findRouteByName(routeName) {
+            url = route.pattern
+            if (parameters != nil) {
+                let routePathComponents = getPathComponents(route.pattern)
+                for pathComponent in routePathComponents {
+                    if pathComponent.hasPrefix(":"),
+                        let value = parameters![pathComponent.substringFromIndex(pathComponent.startIndex.advancedBy(1))] {
+                        urlParts.append(value)
+                    } else {
+                        urlParts.append(pathComponent)
+                    }
+                }
+            }
+            let urlString = urlParts.joinWithSeparator("/")
+            if urlString != "" {
+                url = urlString.hasPrefix("//") ? urlString.substringFromIndex(urlString.startIndex.advancedBy(1)) : urlString
+            }
+        }
+        return url
+    }
+    
     func routeURL(url: String, data: AnyObject?) {
         if let route = findRoute(url) {
             let params = getParamForRoute(url, route: route)
@@ -62,6 +91,8 @@ class Router {
     }
     
     private func addRoute(route: Route) {
+        namedRoutes[route.name] = route
+        
         var routePathComponents = getPathComponents(route.pattern)
         var map: NSMutableDictionary = routeMaps
         for var i = 0; i < routePathComponents.count; i++ {
