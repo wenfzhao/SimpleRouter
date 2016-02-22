@@ -25,9 +25,10 @@ class Router {
     }
     
     func findRoute(url: String) -> Route? {
+        let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         var route: Route?
         var maps = routeMaps
-        let urlPathComponents = getPathComponents(url)
+        let urlPathComponents = getPathComponents(encodedUrl)
         for var i = 0; i < urlPathComponents.count; i++ {
             let pathComponent = urlPathComponents[i]
             for (key, value) in maps {
@@ -62,7 +63,6 @@ class Router {
         var url: String?
         var urlParts = [String]()
         if let route = findRouteByName(routeName) {
-            url = route.pattern
             if (parameters != nil) {
                 let routePathComponents = getPathComponents(route.pattern)
                 for pathComponent in routePathComponents {
@@ -83,8 +83,9 @@ class Router {
     }
     
     func routeURL(url: String, data: AnyObject?) {
-        if let route = findRoute(url) {
-            let params = getParamForRoute(url, route: route)
+        let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        if let route = findRoute(encodedUrl) {
+            let params = getParamForRoute(encodedUrl, route: route)
             let request = RouteRequest(url: url, parameters: params, data: data)
             route.handler(request)
         }
@@ -129,7 +130,7 @@ class Router {
             for queryPart in queryParts {
                 let param = queryPart.componentsSeparatedByString("=")
                 let name = param[0]
-                let value = param[1]
+                let value = param[1].stringByRemovingPercentEncoding
                 parameters[name] = value
             }
         }
