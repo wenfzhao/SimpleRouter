@@ -6,11 +6,11 @@
 
 import Foundation
 
-typealias RouteHandlerClosure = (RouteRequest) -> Bool
+public typealias RouteHandlerClosure = (RouteRequest) -> Bool
 
-class Router {
+public class Router {
     
-    static let sharedInstance = Router()
+    public static let sharedInstance = Router()
     private let routeKey = "_routeIdentifierKey"
     private var routeMaps = NSMutableDictionary()
     private var namedRoutes = [String: Route]()
@@ -19,12 +19,12 @@ class Router {
         
     }
     
-    func map(routePattern: String, name: String? = nil,  handler: RouteHandlerClosure) {
+    public func map(routePattern: String, name: String? = nil,  handler: RouteHandlerClosure) {
         let route = Route(pattern: routePattern, handler: handler, name: name)
         addRoute(route)
     }
     
-    func findRoute(url: String) -> Route? {
+    public func findRoute(url: String) -> Route? {
         let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         var route: Route?
         var maps = routeMaps
@@ -59,7 +59,7 @@ class Router {
         return namedRoutes[name]
     }
     
-    func getRouteUrl(routeName: String, parameters: [String: String]?) -> String? {
+    public func getRouteUrl(routeName: String, parameters: [String: String]?) -> String? {
         var url: String?
         var urlParts = [String]()
         if let route = findRouteByName(routeName) {
@@ -82,7 +82,7 @@ class Router {
         return url
     }
     
-    func routeURL(url: String, data: AnyObject?) {
+    public func routeURL(url: String, data: AnyObject?) {
         let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         if let route = findRoute(encodedUrl) {
             let params = getParamForRoute(encodedUrl, route: route)

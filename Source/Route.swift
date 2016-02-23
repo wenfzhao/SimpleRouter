@@ -6,12 +6,12 @@
 
 import Foundation
 
-class Route {
-    var pattern: String
-    var name: String
-    var handler: RouteHandlerClosure
+public class Route {
+    public var pattern: String
+    public var name: String
+    public var handler: RouteHandlerClosure
     
-    init(pattern: String, handler: RouteHandlerClosure, name: String?) {
+    public init(pattern: String, handler: RouteHandlerClosure, name: String?) {
         self.pattern = pattern
         self.handler = handler
         self.name = name ?? pattern
@@ -19,11 +19,11 @@ class Route {
 }
 
 extension Route: Swift.Printable, Swift.DebugPrintable {
-    var description: String {
+    public var description: String {
         return "\(pattern) -> \(handler)"
     }
     
-    var debugDescription: String {
+    public var debugDescription: String {
         return description
     }
 }

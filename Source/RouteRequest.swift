@@ -6,12 +6,12 @@
 
 import Foundation
 
-class RouteRequest {
-    var url: String
-    var parameters: [String: String]?
-    var requestData: AnyObject?
+public class RouteRequest {
+    public var url: String
+    public var parameters: [String: String]?
+    public var requestData: AnyObject?
     
-    init (url: String, parameters: [String: String]?, data: AnyObject?) {
+    public init (url: String, parameters: [String: String]?, data: AnyObject?) {
         self.url = url
         
         if let parameters = parameters {
@@ -23,7 +23,7 @@ class RouteRequest {
         }
     }
     
-    func getParam(name: String) -> String? {
+    public func getParam(name: String) -> String? {
         var param: String?
         if (parameters != nil) {
             param = parameters![name]
@@ -31,7 +31,7 @@ class RouteRequest {
         return param;
     }
     
-    func setParam(name: String, value: String) {
+    public func setParam(name: String, value: String) {
         parameters = parameters ?? [String: String]()
         parameters![name] = value
     }
