@@ -1,4 +1,4 @@
-class Pipline {
+class Pipeline {
     
     func sendThroughPipline(request: RouteRequest, middleWares: [MiddleWare], handler: RouteHandlerClosure) -> RouteRequest {
         var completion = createCompletionClosure(request, handler: handler)
