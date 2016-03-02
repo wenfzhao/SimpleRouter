@@ -1,6 +1,6 @@
-class Pipeline {
+public class Pipeline {
     
-    func sendThroughPipline(request: RouteRequest, middleWares: [MiddleWare], handler: RouteHandlerClosure) -> RouteRequest {
+    public func sendThroughPipline(request: RouteRequest, middleWares: [MiddleWare], handler: RouteHandlerClosure) -> RouteRequest {
         var completion = createCompletionClosure(request, handler: handler)
         for i in 0..<middleWares.count {
             completion = createClosure(request, closure: completion, middleWare: middleWares[i])
@@ -8,14 +8,14 @@ class Pipeline {
         return completion(request)
     }
     
-    func createClosure(request: RouteRequest, closure: MiddleWareClosure, middleWare: MiddleWare) -> MiddleWareClosure {
+    public func createClosure(request: RouteRequest, closure: MiddleWareClosure, middleWare: MiddleWare) -> MiddleWareClosure {
         func middleClosre(request: RouteRequest) -> RouteRequest {
             return middleWare.handle(request, closure: closure)
         }
         return middleClosre
     }
     
-    func createCompletionClosure(request: RouteRequest, handler: RouteHandlerClosure) -> MiddleWareClosure {
+    public func createCompletionClosure(request: RouteRequest, handler: RouteHandlerClosure) -> MiddleWareClosure {
         func middleHandle(request: RouteRequest) -> RouteRequest {
             return handler(request)
         }

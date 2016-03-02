@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SimpleRouter
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let router = Router.sharedInstance
+        router.map("/") { (request: RouteRequest) -> RouteRequest in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("helloWorldViewController")
+            return request
+        }
+        router.routeURL("/")
         // Override point for customization after application launch.
         return true
     }

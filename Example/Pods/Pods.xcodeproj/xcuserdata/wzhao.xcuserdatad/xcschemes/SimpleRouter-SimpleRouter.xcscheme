@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E13ACF0408C3BCAA0592C61A'
+               BlueprintIdentifier = '300022541FE3A3ED42A35B1C'
                BlueprintName = 'SimpleRouter-SimpleRouter'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SimpleRouter.bundle'>

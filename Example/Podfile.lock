@@ -28,6 +28,6 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SimpleRouter: b90ab8efaef296506fffb50d4e738f334cd55cd2
+  SimpleRouter: ba947d6aab4da5c6ffe7a2d9f2a9654de5197830
 
 COCOAPODS: 0.39.0

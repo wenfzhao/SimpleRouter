@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '87FBDE0DBE0DE323A2F1E145'
+               BlueprintIdentifier = '0E4C8F33AE5CED41F1F3166B'
                BlueprintName = 'Nimble-Snapshots'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Nimble_Snapshots.framework'>

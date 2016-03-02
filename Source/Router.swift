@@ -6,7 +6,7 @@
 
 import Foundation
 
-public typealias RouteHandlerClosure = (RouteRequest) -> Bool
+public typealias RouteHandlerClosure = (RouteRequest) -> RouteRequest
 
 public class Router {
     
@@ -82,7 +82,7 @@ public class Router {
         return url
     }
     
-    public func routeURL(url: String, data: AnyObject?) {
+    public func routeURL(url: String, data: AnyObject? = nil) {
         let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         if let route = findRoute(encodedUrl) {
             let params = getParamForRoute(encodedUrl, route: route)
