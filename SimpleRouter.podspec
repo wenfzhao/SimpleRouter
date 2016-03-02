@@ -30,9 +30,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Source/**/*'
-  s.resource_bundles = {
-    'SimpleRouter' => ['Pod/Assets/*.png']
-  }
 
   # s.public_header_files = 'Source/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
