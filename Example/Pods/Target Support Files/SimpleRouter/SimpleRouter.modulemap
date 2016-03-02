@@ -1,0 +1,6 @@
+framework module SimpleRouter {
+  umbrella header "SimpleRouter-umbrella.h"
+
+  export *
+  module * { export * }
+}
