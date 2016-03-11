@@ -21,6 +21,7 @@ class AuthenticationMiddleware: Middleware {
         } else {
             response = closure(request)
         }
+        print("After AuthenticationMiddleware......")
         return response
     }
 }

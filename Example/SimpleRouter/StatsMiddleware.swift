@@ -12,6 +12,7 @@ import SimpleRouter
 class StatsMiddleware: Middleware {
     
     func handle(request: RouteRequest, closure: MiddlewareClosure) -> RouteRequest {
+        print("Before StatsMiddleware......")
         let returnedRequest = closure(request)
         print("Recording stats......")
         return returnedRequest

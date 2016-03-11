@@ -2,8 +2,9 @@ public class Pipeline {
     
     public func sendThroughPipline(request: RouteRequest, middlewares: [Middleware], handler: RouteHandlerClosure) -> RouteRequest {
         var completion = createCompletionClosure(request, handler: handler)
+        let reversedMiddlewares:[Middleware] = middlewares.reverse()
         for i in 0..<middlewares.count {
-            completion = createClosure(request, closure: completion, middleware: middlewares[i])
+            completion = createClosure(request, closure: completion, middleware: reversedMiddlewares[i])
         }
         return completion(request)
     }
