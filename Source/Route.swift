@@ -10,11 +10,18 @@ public class Route {
     public var pattern: String
     public var name: String
     public var handler: RouteHandlerClosure
+    public var middlewares = [Middleware]()
+    
     
     public init(pattern: String, handler: RouteHandlerClosure, name: String?) {
         self.pattern = pattern
         self.handler = handler
         self.name = name ?? pattern
+    }
+    
+    public func withMiddlewares(middlewares: [Middleware]) -> Route {
+        self.middlewares = middlewares
+        return self
     }
 }
 

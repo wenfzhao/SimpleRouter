@@ -19,9 +19,10 @@ public class Router {
         
     }
     
-    public func map(routePattern: String, name: String? = nil,  handler: RouteHandlerClosure) {
+    public func map(routePattern: String, name: String? = nil,  handler: RouteHandlerClosure) -> Route {
         let route = Route(pattern: routePattern, handler: handler, name: name)
         addRoute(route)
+        return route
     }
     
     public func findRoute(url: String) -> Route? {
@@ -87,7 +88,8 @@ public class Router {
         if let route = findRoute(encodedUrl) {
             let params = getParamForRoute(encodedUrl, route: route)
             let request = RouteRequest(url: url, parameters: params, data: data)
-            route.handler(request)
+            let pipeline = Pipeline()
+            pipeline.sendThroughPipline(request, middlewares: route.middlewares, handler: route.handler)
         }
     }
     

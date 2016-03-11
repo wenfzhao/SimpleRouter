@@ -17,11 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let router = Router.sharedInstance
+        let middleWares: [Middleware] = [
+            AuthenticationMiddleware(),
+            StatsMiddleware()
+        ]
         router.map("/") { (request: RouteRequest) -> RouteRequest in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("helloWorldViewController")
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("homeViewController")
             return request
-        }
+        }.withMiddlewares(middleWares)
+        router.map("/logout") { (request: RouteRequest) -> RouteRequest in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logoutViewController")
+            return request
+        }.withMiddlewares([StatsMiddleware()])
         router.routeURL("/")
         // Override point for customization after application launch.
         return true
