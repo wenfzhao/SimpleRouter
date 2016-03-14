@@ -16,23 +16,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         let router = Router.sharedInstance
-        let middleWares: [Middleware] = [
+        let middlewares: [Middleware] = [
             AuthenticationMiddleware(),
             StatsMiddleware()
         ]
         router.map("/") { (request: RouteRequest) -> RouteRequest in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("homeViewController")
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("rootViewController")
             return request
-        }.withMiddlewares(middleWares)
+        }.withMiddlewares(middlewares)
+        
         router.map("/logout") { (request: RouteRequest) -> RouteRequest in
+            App.isLogin = false
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logoutViewController")
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("logoutViewController") as! LogoutViewController
+            if let fromUrl = request.getParam("_fromUrl") {
+                viewController.fromUrl = fromUrl
+            }
+            self.window?.rootViewController = viewController
             return request
         }.withMiddlewares([StatsMiddleware()])
+        
+        router.map("/album/:albumId") { (request: RouteRequest) -> RouteRequest in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("albumViewController") as! AlbumViewController
+            viewController.albumId = Int(request.getParam("albumId")!)
+//            self.window?.rootViewController?.presentViewController(viewController, animated: false, completion: nil)
+            let rootViewController = self.window?.rootViewController as! UINavigationController
+            rootViewController.pushViewController(viewController, animated: false)
+            return request
+        }.withMiddlewares(middlewares)
+        
         router.routeURL("/")
         // Override point for customization after application launch.
+        return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        let absoluteUrl = url.absoluteString
+        // change mm-ignites://c/1/2 to /c/1/2 for internal routing
+        let route = absoluteUrl.stringByReplacingOccurrencesOfString("\(url.scheme as String)://", withString: "/")
+        Router.sharedInstance.routeURL(route)
         return true
     }
 

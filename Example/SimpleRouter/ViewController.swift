@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var navItem: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,5 +22,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func logoutButtonClicked(sender: AnyObject) {
+        Router.sharedInstance.routeURL("/logout")
+    }
+    
+    @IBAction func albumnAButtonClicked(sender: AnyObject) {
+        Router.sharedInstance.routeURL("/album/1")
+    }
+    
+    @IBAction func AlbumnBButtonClicked(sender: AnyObject) {
+        Router.sharedInstance.routeURL("/album/2")
+    }
 }
 

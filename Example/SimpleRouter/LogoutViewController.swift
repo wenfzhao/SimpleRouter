@@ -10,7 +10,10 @@ import UIKit
 
 class LogoutViewController: UIViewController {
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
+    
+    var fromUrl: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,4 +25,11 @@ class LogoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func loginButtonClicked(sender: AnyObject) {
+        App.isLogin = true
+        Router.sharedInstance.routeURL("/")
+        if fromUrl != nil {
+            Router.sharedInstance.routeURL(fromUrl!)
+        }
+    }
 }

@@ -14,10 +14,13 @@ class AuthenticationMiddleware: Middleware {
     func handle(request: RouteRequest, closure: MiddlewareClosure) -> RouteRequest {
         var response = request
         print("Authenticating user......")
-        let isAuthenticated = false
-        if (isAuthenticated == false) {
+        if (App.isLogin == false) {
             print("User not authenticated")
-            Router.sharedInstance.routeURL("/logout")
+            var url = "/logout"
+            if request.url != "/logout" {
+                url = "/logout?_fromUrl=\(request.url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)"
+            }
+            Router.sharedInstance.routeURL(url)
         } else {
             response = closure(request)
         }

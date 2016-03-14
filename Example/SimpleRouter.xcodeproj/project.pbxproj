@@ -14,6 +14,8 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B7CBD3078F4257C0DDB8A525 /* Pods_SimpleRouter_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B853EEB679D84D51D52880AE /* Pods_SimpleRouter_Tests.framework */; };
+		C94C234E1C9375AF00D36217 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94C234D1C9375AF00D36217 /* App.swift */; };
+		C94C23501C93798000D36217 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94C234F1C93798000D36217 /* AlbumViewController.swift */; };
 		C9BCAEC41C87976900CB891D /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCAEBF1C87976900CB891D /* Middleware.swift */; };
 		C9BCAEC51C87976900CB891D /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCAEC01C87976900CB891D /* Pipeline.swift */; };
 		C9BCAEC61C87976900CB891D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCAEC11C87976900CB891D /* Router.swift */; };
@@ -54,6 +56,8 @@
 		90C3604E63FE50FECE169FDD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B853EEB679D84D51D52880AE /* Pods_SimpleRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB228A48685A9DB78840F4F1 /* SimpleRouter.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SimpleRouter.podspec; path = ../SimpleRouter.podspec; sourceTree = "<group>"; };
+		C94C234D1C9375AF00D36217 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		C94C234F1C93798000D36217 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		C9BCAEBF1C87976900CB891D /* Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
 		C9BCAEC01C87976900CB891D /* Pipeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
 		C9BCAEC11C87976900CB891D /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				C94C234D1C9375AF00D36217 /* App.swift */,
 				C9BCAEBE1C87974300CB891D /* Source */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for SimpleRouter */,
@@ -119,6 +124,7 @@
 				C9BCAEC91C8880F600CB891D /* StatsMiddleware.swift */,
 				C9BCAECB1C8881A100CB891D /* AuthenticationMiddleware.swift */,
 				C9BCAECD1C8885B100CB891D /* LogoutViewController.swift */,
+				C94C234F1C93798000D36217 /* AlbumViewController.swift */,
 			);
 			name = "Example for SimpleRouter";
 			path = SimpleRouter;
@@ -394,6 +400,8 @@
 			files = (
 				C9BCAEC41C87976900CB891D /* Middleware.swift in Sources */,
 				C9BCAEC71C87976900CB891D /* RouteRequest.swift in Sources */,
+				C94C234E1C9375AF00D36217 /* App.swift in Sources */,
+				C94C23501C93798000D36217 /* AlbumViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				C9BCAEC61C87976900CB891D /* Router.swift in Sources */,
 				C9BCAECC1C8881A100CB891D /* AuthenticationMiddleware.swift in Sources */,
