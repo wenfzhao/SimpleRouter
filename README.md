@@ -93,3 +93,8 @@ router.map("/album/:albumId", handler: { (request: RouteReqest) -> (RouteReqest)
     return request
 }).withMiddlewares(middlewares)
 ```
+
+## Deep Linking to App
+
+Install the Test app: 
+Open simplerouter://album/2 in safari
