@@ -12,7 +12,7 @@ You can install SimpleRouter via CocoaPods by adding it to your `Podfile`:
 	source 'https://github.com/CocoaPods/Specs.git'
 	platform :ios, '8.0'
 
-	pod 'SimpleRouter', '~> 3.0'
+	pod 'SimpleRouter', '~> 0.1.0'
 	
 And run `pod install`.
 
