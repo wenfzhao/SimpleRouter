@@ -56,7 +56,7 @@ public class Router {
         return route
     }
     
-    func findRouteByName(name: String) -> Route? {
+    public func findRouteByName(name: String) -> Route? {
         return namedRoutes[name]
     }
     
