@@ -2,6 +2,21 @@
 A Simple Laravel/Lumen Inspired Url-Based Router Library With Middleware Support Written Entirely in Swift
 
 
+## Installation
+
+### CocoaPods
+You can install SimpleRouter via CocoaPods by adding it to your `Podfile`:
+
+	use_frameworks!
+
+	source 'https://github.com/CocoaPods/Specs.git'
+	platform :ios, '8.0'
+
+	pod 'SimpleRouter', '~> 3.0'
+	
+And run `pod install`.
+
+
 ## Usage
    
 ### Routing handler
