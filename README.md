@@ -112,4 +112,4 @@ router.map("/album/:albumId", handler: { (request: RouteReqest) -> (RouteReqest)
 ## Deep Linking to App
 
 Install the Test app: 
-Open simplerouter://album/2 in safari
+Open `simplerouter://album/2` in safari
