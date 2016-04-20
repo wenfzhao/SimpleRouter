@@ -33,7 +33,7 @@ public class RouteRequest {
     
     public func setParam(name: String, value: String) {
         parameters = parameters ?? [String: String]()
-        parameters![name] = value
+        parameters![name] = value.stringByRemovingPercentEncoding
     }
     
 }

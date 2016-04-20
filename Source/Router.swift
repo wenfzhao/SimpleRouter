@@ -30,7 +30,7 @@ public class Router {
         var route: Route?
         var maps = routeMaps
         let urlPathComponents = getPathComponents(encodedUrl)
-        for var i = 0; i < urlPathComponents.count; i++ {
+        for i in 0 ..< urlPathComponents.count {
             let pathComponent = urlPathComponents[i]
             for (key, value) in maps {
                 if maps[pathComponent] != nil { //no exact match
@@ -56,7 +56,7 @@ public class Router {
         return route
     }
     
-    public func findRouteByName(name: String) -> Route? {
+    func findRouteByName(name: String) -> Route? {
         return namedRoutes[name]
     }
     
@@ -87,7 +87,7 @@ public class Router {
         let encodedUrl = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         if let route = findRoute(encodedUrl) {
             let params = getParamForRoute(encodedUrl, route: route)
-            let request = RouteRequest(url: url, parameters: params, data: data)
+            let request = RouteRequest(url: encodedUrl, parameters: params, data: data)
             let pipeline = Pipeline()
             pipeline.sendThroughPipline(request, middlewares: route.middlewares, handler: route.handler)
         }
@@ -98,17 +98,18 @@ public class Router {
         
         var routePathComponents = getPathComponents(route.pattern)
         var map: NSMutableDictionary = routeMaps
-        for var i = 0; i < routePathComponents.count; i++ {
+        for i in 0 ..< routePathComponents.count {
             let pathComponent = routePathComponents[i]
             // new path
             if map[pathComponent] == nil {
-                if i == (routePathComponents.count - 1) {
-                    map[pathComponent] = NSMutableDictionary(dictionary: [routeKey: route])
-                    return
-                }
                 map[pathComponent] = NSMutableDictionary()
             }
             map = map[pathComponent] as! NSMutableDictionary
+            
+            if i == (routePathComponents.count - 1) {
+                map[routeKey] = route
+                return
+            }
         }
     }
     
@@ -118,7 +119,7 @@ public class Router {
         // get parameters from route
         let routePathComponents = getPathComponents(route.pattern)
         let urlPathComponents = getPathComponents(url)
-        for var i = 0; i < routePathComponents.count; i++ {
+        for i in 0 ..< routePathComponents.count {
             let pathComponent = routePathComponents[i]
             if pathComponent.hasPrefix(":") {
                 let name = pathComponent.substringFromIndex(pathComponent.startIndex.advancedBy(1))
@@ -130,10 +131,11 @@ public class Router {
         if let url = NSURL(string: url) where (url.query != nil) {
             let queryParts = url.query!.componentsSeparatedByString("&")
             for queryPart in queryParts {
-                let param = queryPart.componentsSeparatedByString("=")
-                let name = param[0]
-                let value = param[1].stringByRemovingPercentEncoding
-                parameters[name] = value
+                if let range = queryPart.rangeOfString("=") {
+                    let name = queryPart.substringToIndex(range.startIndex)
+                    let value = queryPart.substringFromIndex(range.endIndex).stringByRemovingPercentEncoding
+                    parameters[name] = value?.stringByRemovingPercentEncoding
+                }
             }
         }
         
